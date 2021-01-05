@@ -1,0 +1,5 @@
+.idea/
+pkg/
+sdm845-linux/
+src/
+*.pkg*
