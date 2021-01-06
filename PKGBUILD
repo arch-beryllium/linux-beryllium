@@ -3,24 +3,26 @@ _srcname=sdm845-linux
 _kernelname=${pkgbase#linux}
 _desc="Xiaomi Beryllium"
 pkgver=5.10.0
-pkgrel=1
+pkgrel=2
 arch=('aarch64')
 url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/beryllium-dev-battery"
 license=('GPL2')
-makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'dtc')
+makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'dtc' 'cpio')
 options=('!strip')
 source=('git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#branch=beryllium-dev-battery'
         'config'
         'linux.preset'
         '60-linux.hook'
         '90-linux.hook'
-        '120-linux.hook')
+        '91-linux.hook'
+        'update-bootimg.sh')
 md5sums=('SKIP'
-         'SKIP'
-         'SKIP'
-         'SKIP'
-         'SKIP'
-         'SKIP')
+         'bc246045a71878eb146ac8464bd0a4b3'
+         '86d4a35722b5410e3b29fc92dae15d4b'
+         'ce6c81ad1ad1f8b333fd6077d47abdaf'
+         '3dc88030a8f2f5a5f97266d99b149f77'
+         '25d87e5241ea54e9fd9790d5777b7a9f'
+         '3050c5faf0caf13a6f61035b886e31eb')
 
 prepare() {
   cd ${_srcname}
@@ -99,8 +101,10 @@ _package() {
     install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/60-${pkgbase}.hook"
   sed "${_subst}" ../90-linux.hook |
     install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/90-${pkgbase}.hook"
-  sed "${_subst}" ../120-linux.hook |
-    install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/120-${pkgbase}.hook"
+  sed "${_subst}" ../91-linux.hook |
+    install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/91-${pkgbase}.hook"
+  sed "${_subst}" ../update-bootimg.sh |
+    install -Dm755 /dev/stdin "${pkgdir}/usr/bin/update-bootimg"
 }
 
 _package-headers() {

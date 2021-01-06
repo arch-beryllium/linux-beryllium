@@ -1,0 +1,13 @@
+[Trigger]
+Type = File
+Operation = Install
+Operation = Upgrade
+Target = boot/Image
+Target = usr/lib/initcpio/*
+Target = usr/lib/modules/%KERNVER%/*
+Target = usr/lib/modules/%EXTRAMODULES%/*
+
+[Action]
+Description = Updating %PKGBASE% boot.img...
+When = PostTransaction
+Exec = /usr/bin/update-bootimg
