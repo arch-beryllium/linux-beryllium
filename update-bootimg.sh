@@ -12,5 +12,24 @@ mkbootimg \
   --pagesize 4096 \
   --cmdline "root=LABEL=ALARM rw audit=0 bootsplash.bootfile=bootsplash" \
   -o /boot/boot.img
-echo "Flashing new boot.img"
-dd if=/boot/boot.img of="$(readlink -f /dev/disk/by-partlabel/boot)"
+
+if [ -e /dev/disk/by-partlabel/boot ]; then
+  echo "Running on the device"
+
+  dir=$(mktemp -d)
+  unpackbootimg -i /boot/boot.img -o "$dir"
+  cmdline=$(cat "$dir"/boot.img-cmdline)
+  rm -rf "$dir"
+
+  if [[ $cmdline == *"ALARM"* ]]; then
+    echo "Running with permanent boot.img"
+    echo "Flashing new boot.img"
+    dd if=/boot/boot.img of="$(readlink -f /dev/disk/by-partlabel/boot)"
+  else
+    echo "Running with temporary boot.img"
+    echo "Skip flashing new boot.img"
+  fi
+else
+  echo "Not running on the device"
+  echo "Skip flashing new boot.img"
+fi
