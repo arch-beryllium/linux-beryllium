@@ -17,7 +17,7 @@ if [ -e /dev/disk/by-partlabel/boot ]; then
   echo "Running on the device"
 
   dir=$(mktemp -d)
-  unpack_bootimg -i /boot/boot.img -o "$dir"
+  unpack_bootimg --boot_img /boot/boot.img --out "$dir"
   cmdline=$(cat "$dir"/boot.img-cmdline)
   rm -rf "$dir"
 
