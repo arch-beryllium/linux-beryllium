@@ -17,8 +17,7 @@ if [ -e /dev/disk/by-partlabel/boot ]; then
   echo "Running on the device"
 
   dir=$(mktemp -d)
-  unpack_bootimg --boot_img /boot/boot.img --out "$dir"
-  cmdline=$(cat "$dir"/boot.img-cmdline)
+  cmdline=$(unpack_bootimg --boot_img "$(readlink -f /dev/disk/by-partlabel/boot)" --out "$dir" | grep -E "^command line args")
   rm -rf "$dir"
 
   if [[ $cmdline == *"ALARM"* ]]; then
