@@ -3,7 +3,7 @@ _srcname=sdm845-linux
 _kernelname=${pkgbase#linux}
 _desc="Xiaomi Beryllium"
 pkgver=5.10.0
-pkgrel=2
+pkgrel=3
 arch=('aarch64')
 url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/beryllium-dev-battery"
 license=('GPL2')
@@ -15,17 +15,67 @@ source=('git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#branch=berylliu
         '60-linux.hook'
         '90-linux.hook'
         '91-linux.hook'
-        'update-bootimg.sh')
+        'update-bootimg.sh'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0001-revert-fbcon-remove-now-unusued-softback_lines-cursor-argument.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0002-revert-fbcon-remove-no-op-fbcon_set_origin.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0003-revert-fbcon-remove-soft-scrollback-code.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0001-bootsplash.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0002-bootsplash.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0003-bootsplash.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0004-bootsplash.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0005-bootsplash.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0006-bootsplash.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0007-bootsplash.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0008-bootsplash.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0009-bootsplash.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0010-bootsplash.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0011-bootsplash.patch'
+        'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0012-bootsplash.patch')
 md5sums=('SKIP'
          'bc246045a71878eb146ac8464bd0a4b3'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3dc88030a8f2f5a5f97266d99b149f77'
          '25d87e5241ea54e9fd9790d5777b7a9f'
-         '3050c5faf0caf13a6f61035b886e31eb')
+         '1ab4faf268decae288c23948126c2923'
+         'SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP')
 
 prepare() {
   cd ${_srcname}
+
+  # Reset repo because otherwise the patches wouldn't apply on a dirty build
+  git clean -fd
+  git checkout .
+
+  patch -Np1 -i "${srcdir}/0001-revert-fbcon-remove-now-unusued-softback_lines-cursor-argument.patch"
+  patch -Np1 -i "${srcdir}/0002-revert-fbcon-remove-no-op-fbcon_set_origin.patch"
+  patch -Np1 -i "${srcdir}/0003-revert-fbcon-remove-soft-scrollback-code.patch"
+  patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0002-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0003-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0004-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0005-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0006-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0007-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0008-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0009-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0010-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0011-bootsplash.patch"
+  patch -Np1 -i "${srcdir}/0012-bootsplash.patch"
 
   cp ../config .config
   make olddefconfig

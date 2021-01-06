@@ -1,5 +1,6 @@
 .idea/
 pkg/
 sdm845-linux/
+*.patch
 src/
 *.pkg*
