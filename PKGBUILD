@@ -3,7 +3,7 @@ _srcname=sdm845-linux
 _kernelname=${pkgbase#linux}
 _desc="Xiaomi Beryllium"
 pkgver=5.10.0
-pkgrel=8
+pkgrel=9
 arch=('aarch64')
 url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/beryllium-dev-battery"
 license=('GPL2')
@@ -32,7 +32,7 @@ source=('git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#branch=berylliu
         'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0011-bootsplash.patch'
         'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0012-bootsplash.patch')
 md5sums=('SKIP'
-         'bc246045a71878eb146ac8464bd0a4b3'
+         '115e41b3a7f79704932bc5543a302541'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3dc88030a8f2f5a5f97266d99b149f77'
