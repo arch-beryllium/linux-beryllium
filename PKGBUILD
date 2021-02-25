@@ -3,13 +3,13 @@ _srcname=sdm845-linux
 _kernelname=${pkgbase#linux}
 _desc="Xiaomi Beryllium"
 pkgver=5.10.0
-pkgrel=10
+pkgrel=11
 arch=('aarch64')
-url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/beryllium-dev-battery"
+url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/sdm845-stable-5.10"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'dtc' 'cpio')
 options=('!strip')
-source=('git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#branch=beryllium-dev-battery'
+source=('git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#branch=sdm845-stable-5.10'
         'extra_config'
         'linux.preset'
         '60-linux.hook'
@@ -32,7 +32,7 @@ source=('git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#branch=berylliu
         'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0011-bootsplash.patch'
         'https://raw.githubusercontent.com/dreemurrs-embedded/Pine64-Arch/master/PKGBUILDS/pine64/linux-pine64/0012-bootsplash.patch')
 md5sums=('SKIP'
-         '37115d636dfbee9dbe20fe8c5ddd00e7'
+         '6b98f9b0f15488536791771b54e4f058'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3dc88030a8f2f5a5f97266d99b149f77'
@@ -53,6 +53,11 @@ md5sums=('SKIP'
          'SKIP'
          'SKIP'
          'SKIP')
+
+pkgver() {
+ cd ${_pkgname}
+ make kernelversion
+}
 
 prepare() {
   cd ${_srcname}
@@ -77,7 +82,7 @@ prepare() {
   patch -Np1 -i "${srcdir}/0011-bootsplash.patch"
   patch -Np1 -i "${srcdir}/0012-bootsplash.patch"
 
-  cp arch/arm64/configs/beryllium_defconfig .config
+  make defconfig sdm845.config beryllium.config
   cat ../extra_config >> .config
   make olddefconfig
 
