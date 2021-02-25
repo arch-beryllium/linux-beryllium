@@ -2,8 +2,8 @@ pkgbase=linux-beryllium
 _srcname=sdm845-linux
 _kernelname=${pkgbase#linux}
 _desc="Xiaomi Beryllium"
-pkgver=5.10.0
-pkgrel=11
+pkgver=5.10.12
+pkgrel=1
 arch=('aarch64')
 url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/sdm845-stable-5.10"
 license=('GPL2')
@@ -55,8 +55,8 @@ md5sums=('SKIP'
          'SKIP')
 
 pkgver() {
- cd ${_pkgname}
- make kernelversion
+ cd ${_srcname}
+ make kernelversion | cut -f 1 -d "-"
 }
 
 prepare() {
