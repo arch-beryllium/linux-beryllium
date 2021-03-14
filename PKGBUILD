@@ -3,7 +3,7 @@ _srcname=sdm845-linux
 _kernelname=${pkgbase#linux}
 _desc="Xiaomi Beryllium"
 pkgver=5.11.0
-pkgrel=1
+pkgrel=2
 arch=('aarch64')
 url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/sdm845-stable"
 license=('GPL2')
@@ -103,7 +103,7 @@ build() {
 
 _package() {
   pkgdesc="The Linux Kernel and modules - ${_desc}"
-  depends=('coreutils' 'firmware-xiaomi-beryllium' 'kmod' 'mkinitcpio>=0.7' 'android-tools' 'python' 'python2')
+  depends=('coreutils' 'firmware-xiaomi-beryllium' 'kmod' 'mkinitcpio>=0.7' 'mkbootimg-tools')
   optdepends=('crda: to set the correct wireless channels of your country')
   provides=("linux=${pkgver}" "WIREGUARD-MODULE")
   replaces=('linux-armv8')
