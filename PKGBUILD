@@ -3,13 +3,13 @@ _srcname=sdm845-linux
 _kernelname=${pkgbase#linux}
 _desc="Xiaomi Beryllium"
 pkgver=5.11.0
-pkgrel=2
+pkgrel=3
 arch=('aarch64')
-url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/sdm845-stable"
+url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/sdm845-stable-ebbg"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'dtc' 'cpio')
 options=('!strip')
-source=('git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#branch=sdm845-stable'
+source=('git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#branch=sdm845-stable-ebbg'
         'extra_config'
         'linux.preset'
         '60-linux.hook'
@@ -37,7 +37,7 @@ sha256sums=('SKIP'
            'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
            '71df1b18a3885b151a3b9d926a91936da2acc90d5e27f1ad326745779cd3759d'
            '45e4faaad73b3067b4506f9ea4beb55cadc56e2f73cdf587042e0beca58da305'
-           '77a02c42aebef0da34a691884f977a2e0d7d4a8c0e02270c9412cbc18245e3db'
+           '46e7f826f741d6b1538f515bb75a769e18e62dbecf6c010d072e4dba13875aa6'
            'ddf1e7fc55cc6fe81ecfcac84112e573ca95713c027bc84d69cf880812fd6ff3'
            '94a8538251ad148f1025cc3de446ce64f73dc32b01815426fb159c722e8fa5bc'
            '37a221c12b40122167b0a30b5a9f2fc99e2aeb94e4db58a719c2b30171c5aeb5'
@@ -98,7 +98,8 @@ build() {
   unset LDFLAGS
   make ${MAKEFLAGS} Image Image.gz modules
   make ${MAKEFLAGS} DTC_FLAGS="-@" dtbs
-  cat arch/arm64/boot/Image.gz arch/arm64/boot/dts/qcom/sdm845-xiaomi-beryllium.dtb >arch/arm64/boot/Image.gz-dtb
+  cat arch/arm64/boot/Image.gz arch/arm64/boot/dts/qcom/sdm845-xiaomi-beryllium-tianma.dtb >arch/arm64/boot/Image-tianma.gz-dtb
+  cat arch/arm64/boot/Image.gz arch/arm64/boot/dts/qcom/sdm845-xiaomi-beryllium-ebbg.dtb >arch/arm64/boot/Image-ebbg.gz-dtb
 }
 
 _package() {
@@ -122,7 +123,7 @@ _package() {
 
   mkdir -p "${pkgdir}"/{boot,usr/lib/modules}
   make INSTALL_MOD_PATH="${pkgdir}/usr" modules_install
-  cp arch/$KARCH/boot/Image{,.gz,.gz-dtb} "${pkgdir}/boot"
+  cp arch/$KARCH/boot/Image{,.gz,*.gz-dtb} "${pkgdir}/boot"
 
   # make room for external modules
   local _extramodules="extramodules-${_basekernel}${_kernelname}"
