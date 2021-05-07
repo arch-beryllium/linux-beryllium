@@ -2,35 +2,35 @@ pkgbase=linux-beryllium
 _srcname=sdm845-linux
 _kernelname=${pkgbase#linux}
 _desc="Xiaomi Beryllium"
-pkgver=5.11.0
-pkgrel=5
+pkgver=5.12.0
+pkgrel=1
 arch=('aarch64')
-url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/sdm845-stable-ebbg"
+url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/sdm845-stable"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'dtc' 'cpio')
 options=('!strip')
-source=('git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#branch=sdm845-stable-ebbg'
+source=('git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#branch=sdm845-stable'
         'extra_config'
         'linux.preset'
         '60-linux.hook'
         '90-linux.hook'
         '91-linux.hook'
         'update-bootimg.sh'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0001-revert-fbcon-remove-now-unusued-softback_lines-cursor-argument.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0002-revert-fbcon-remove-no-op-fbcon_set_origin.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0003-revert-fbcon-remove-soft-scrollback-code.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0001-bootsplash.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0002-bootsplash.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0003-bootsplash.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0004-bootsplash.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0005-bootsplash.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0006-bootsplash.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0007-bootsplash.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0008-bootsplash.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0009-bootsplash.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0010-bootsplash.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0011-bootsplash.patch'
-        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.11-megi/0012-bootsplash.patch')
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0001-revert-fbcon-remove-now-unusued-softback_lines-cursor-argument.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0002-revert-fbcon-remove-no-op-fbcon_set_origin.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0003-revert-fbcon-remove-soft-scrollback-code.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0001-bootsplash.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0002-bootsplash.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0003-bootsplash.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0004-bootsplash.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0005-bootsplash.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0006-bootsplash.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0007-bootsplash.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0008-bootsplash.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0009-bootsplash.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0010-bootsplash.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0011-bootsplash.patch'
+        'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0012-bootsplash.patch')
 sha256sums=('SKIP'
            'ce1b39d9441fbd59404a49e2b74fba7c0ee8c08fb712b8578882df4629da70d9'
            '66644820faa950a5fc59181f5aefcbed6d7ed652b29aee69979a2be2a032025d'
@@ -40,7 +40,7 @@ sha256sums=('SKIP'
            '2e305f67418ee1aae18f55327f6b4bc1780f7840c07886cbb9dda1cb9320381e'
            'ddf1e7fc55cc6fe81ecfcac84112e573ca95713c027bc84d69cf880812fd6ff3'
            '94a8538251ad148f1025cc3de446ce64f73dc32b01815426fb159c722e8fa5bc'
-           '37a221c12b40122167b0a30b5a9f2fc99e2aeb94e4db58a719c2b30171c5aeb5'
+           '1f18c5c10a3c63e41ecd05ad34cd9f6653ba96e9f1049ce2b7bb6da2578ae710'
            '59202940d4f12bad23c194a530edc900e066866c9945e39748484a6545af96de'
            'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
            '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
