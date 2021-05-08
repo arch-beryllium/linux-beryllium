@@ -2,5 +2,6 @@
 pkg/
 sdm845-linux/
 *.patch
+patch-*
 src/
 *.pkg*
