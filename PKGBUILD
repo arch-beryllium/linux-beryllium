@@ -4,7 +4,7 @@ _kernelname=${pkgbase#linux}
 _desc="Xiaomi Beryllium"
 _commit=b7a1e57f78d690d02aff902114bf2f6ca978ecfe
 pkgver=5.12.2
-pkgrel=3
+pkgrel=4
 arch=('aarch64')
 url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/sdm845-stable"
 license=('GPL2')
@@ -35,7 +35,7 @@ source=("git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#commit=$_commit
         'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0012-bootsplash.patch')
 sha256sums=('SKIP'
            'd77076db69357a0b4c4868273f21f987f0c88c194865f43b17e21edd78add561'
-           '7d8a1de1d2f329a1e8f651c5b42f6d7cfca78d8b13b55c9b6047d8f2a3c628d7'
+           'e8f0716ce02d05f4c399ef04f8a8348d89c28179b3890125442f06f5cfdbd154'
            '66644820faa950a5fc59181f5aefcbed6d7ed652b29aee69979a2be2a032025d'
            'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
            '71df1b18a3885b151a3b9d926a91936da2acc90d5e27f1ad326745779cd3759d'
