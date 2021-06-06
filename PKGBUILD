@@ -2,16 +2,15 @@ pkgbase=linux-beryllium
 _srcname=sdm845-linux
 _kernelname=${pkgbase#linux}
 _desc="Xiaomi Beryllium"
-_commit=b7a1e57f78d690d02aff902114bf2f6ca978ecfe
-pkgver=5.12.2
-pkgrel=4
+_commit=c2ca8a58d40c7a5687d576ce07f6f62446246422
+pkgver=5.12.8
+pkgrel=1
 arch=('aarch64')
 url="https://gitlab.com/sdm845-mainline/sdm845-linux/-/tree/sdm845-stable"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'dtc' 'cpio')
 options=('!strip')
 source=("git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#commit=$_commit"
-        "http://www.kernel.org/pub/linux/kernel/v5.x/patch-$pkgver.xz"
         'extra_config'
         'linux.preset'
         '60-linux.hook'
@@ -34,7 +33,6 @@ source=("git+https://gitlab.com/sdm845-mainline/sdm845-linux.git#commit=$_commit
         'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0011-bootsplash.patch'
         'https://gitlab.manjaro.org/manjaro-arm/packages/core/linux-pinephone/-/raw/5.12-megi/0012-bootsplash.patch')
 sha256sums=('SKIP'
-           'd77076db69357a0b4c4868273f21f987f0c88c194865f43b17e21edd78add561'
            'e8f0716ce02d05f4c399ef04f8a8348d89c28179b3890125442f06f5cfdbd154'
            '66644820faa950a5fc59181f5aefcbed6d7ed652b29aee69979a2be2a032025d'
            'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -57,15 +55,17 @@ sha256sums=('SKIP'
            '27471eee564ca3149dd271b0817719b5565a9594dc4d884fe3dc51a5f03832bc'
            '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d')
 
+pkgver() {
+  cd ${_srcname}
+  make kernelversion | cut -d "-" -f 1
+}
+
 prepare() {
   cd ${_srcname}
 
   # Reset repo because otherwise the patches wouldn't apply on a dirty build
   git clean -fd
   git checkout .
-
-  # add upstream patch
-  git apply --whitespace=nowarn ../patch-${pkgver}
 
   patch -Np1 -i "${srcdir}/0001-revert-fbcon-remove-now-unusued-softback_lines-cursor-argument.patch"
   patch -Np1 -i "${srcdir}/0002-revert-fbcon-remove-no-op-fbcon_set_origin.patch"
@@ -86,9 +86,6 @@ prepare() {
   make defconfig sdm845.config
   cat ../extra_config >> .config
   make olddefconfig
-
-  # add pkgrel to extraversion
-  sed -ri "s|^(EXTRAVERSION =)(.*)|\1 \2-${pkgrel}|" Makefile
 
   # don't run depmod on 'make install'. We'll do this ourselves in packaging
   sed -i '2iexit 0' scripts/depmod.sh
